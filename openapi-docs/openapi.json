@@ -1,0 +1,128 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "My Example API",
+        "version": "1.0.0",
+        "description": "Example openapi (swagger) documentation of my amazing API.  [Source on github](your url here)",
+        "servers": ["http://localhost:4000"]
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "tags": ["Misc"],
+                "summary": "root route - a welcome",
+                "responses": {
+                    "200": {
+                        "description": "Returns a greeting listing some common routes."
+                    }
+                }
+            }
+        },
+        "/jokes": {
+            "post": {
+                "tags": ["Jokes"],
+                "summary": "create a joke",
+                "requestBody": {
+                    "description": "contents of new joke to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Joke"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "joke has been accepted.  the content of the created joke is returned, including a newly assigned id.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Joke"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "an error when the request is bad",
+                        "content": {
+                            "application/plain": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/jokes/{id}": {
+            "delete": {
+                "summary": "Delete a joke by ID",
+                "description": "Deletes a joke from the system based on the provided ID.",
+                "tags": ["Jokes"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The unique identifier of the joke to delete.",
+                        "required": true,
+                        "schema": { "type": "integer" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Joke deleted successfully.  Returns deleted joke.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Joke"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request (e.g., missing or invalid ID format)"
+                    },
+                    "404": {
+                        "description": "Joke not found for the provided ID"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Joke": {
+                "description": "Representation of a Joke",
+                "type": "object",
+                "required": ["setup", "punchline"],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "The unique id of the joke."
+                    },
+                    "setup": {
+                        "type": "string",
+                        "description": "The leading part of the joke that introduces the humorous situation."
+                    },
+                    "punchline": {
+                        "type": "string",
+                        "description": "The concluding part of the joke that delivers the humour."
+                    }
+                },
+                "example": {
+                    "id": 1,
+                    "setup": "What did the fish say when it hit the wall?",
+                    "punchline": "Dam."
+                }
+            }
+        }
+    },
+    "tags": [
+        { "name": "Jokes", "description": "The joke-management API" },
+        {
+            "name": "Misc",
+            "description": "An assortment of other end-points for testing and exploration"
+        }
+    ]
+}
