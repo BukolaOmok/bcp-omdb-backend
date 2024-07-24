@@ -1,5 +1,5 @@
 import { app } from "./support/setupExpress.js";
-import { query } from "./support/db.js";
+// import { query } from "./support/db.js";
 import pg from "pg";
 
 //You should delete all of these route handlers and replace them according to your own requirements
