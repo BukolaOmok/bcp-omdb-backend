@@ -1,4 +1,10 @@
-# Intermediate starter for _javascript_ express APIs.
+# Description
+
+update this at the end
+
+confluence - https://bcp-omdb-fullstack-project.atlassian.net/wiki/spaces/~712020f08a9a3b21b24031a4c97387b668d911/pages/98937/BCP+OMDB+FULLSTACK+PROJECT+DOCUMENTATION
+
+jira - https://bcp-omdb-fullstack-project.atlassian.net/jira/software/projects/KAN/boards/1
 
 This is an intermediate starter template for node.js API apps written in JavaScript (not TypeScript) using Express.
 
