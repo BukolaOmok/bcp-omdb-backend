@@ -1,18 +1,16 @@
 import { app } from "./support/setupExpress.js";
 import { query } from "./support/db.js";
-import pg from "pg"
+import pg from "pg";
 
 //You should delete all of these route handlers and replace them according to your own requirements
-const dbURL =process.env.DATABASE_URL;
+const dbURL = process.env.DATABASE_URL;
 
-const client = new pg.Client ({
+const client = new pg.Client({
     connectionString: dbURL,
     ssl: true,
 });
 
-
 client.connect();
-
 
 app.get("/", (req, res) => {
     res.json({
@@ -20,7 +18,6 @@ app.get("/", (req, res) => {
         message: "you have connected to the omdb database",
     });
 });
-
 
 // use the environment variable PORT, or 4000 as a fallback
 const PORT = process.env.PORT ?? 4000;
