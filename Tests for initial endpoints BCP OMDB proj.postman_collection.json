@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "f007f6ba-fc64-45c2-ae04-12cde2cb5bda",
+		"name": "Tests for initial endpoints BCP OMDB proj",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36846326",
+		"_collection_link": "https://bcp-omdb-project.postman.co/workspace/BCP---OMDB-project~09458e7f-ead9-4be8-88a4-5437317acfdb/collection/36846326-f007f6ba-fc64-45c2-ae04-12cde2cb5bda?action=share&source=collection_link&creator=36846326"
+	},
+	"item": [
+		{
+			"name": "https://bcp-omdb-backend.onrender.com/movies/search?searchTerm=batman",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bcp-omdb-backend.onrender.com/movies/search?searchTerm=batman",
+					"protocol": "https",
+					"host": [
+						"bcp-omdb-backend",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"movies",
+						"search"
+					],
+					"query": [
+						{
+							"key": "searchTerm",
+							"value": "batman"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://bcp-omdb-backend.onrender.com/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bcp-omdb-backend.onrender.com/",
+					"protocol": "https",
+					"host": [
+						"bcp-omdb-backend",
+						"onrender",
+						"com"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "GEt request to test connection"
+			},
+			"response": []
+		},
+		{
+			"name": "https://bcp-omdb-backend.onrender.com/movies/17/comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bcp-omdb-backend.onrender.com/movies/17/comments",
+					"protocol": "https",
+					"host": [
+						"bcp-omdb-backend",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"movies",
+						"17",
+						"comments"
+					]
+				},
+				"description": "Tests get request which joins movie table and comments table"
+			},
+			"response": []
+		},
+		{
+			"name": "https://bcp-omdb-backend.onrender.com/movies/17/comments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://bcp-omdb-backend.onrender.com/movies/17/comments",
+					"protocol": "https",
+					"host": [
+						"bcp-omdb-backend",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"movies",
+						"17",
+						"comments"
+					]
+				},
+				"description": "Tests whether api able to add comments to the OMDB database"
+			},
+			"response": []
+		},
+		{
+			"name": "https://bcp-omdb-backend.onrender.com/comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bcp-omdb-backend.onrender.com/comments",
+					"protocol": "https",
+					"host": [
+						"bcp-omdb-backend",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"comments"
+					]
+				},
+				"description": "Tests whether api can get all from the comments table"
+			},
+			"response": []
+		},
+		{
+			"name": "https://bcp-omdb-backend.onrender.com/comments/312",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bcp-omdb-backend.onrender.com/comments/312",
+					"protocol": "https",
+					"host": [
+						"bcp-omdb-backend",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"comments",
+						"312"
+					]
+				},
+				"description": "tests whether api can handle a parametric endpoint and get a comment via its id."
+			},
+			"response": []
+		}
+	]
+}
