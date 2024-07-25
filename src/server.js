@@ -1,5 +1,5 @@
 import { app } from "./support/setupExpress.js";
-// import { query } from "./support/db.js";
+import { query } from "./support/db.js";
 import pg from "pg";
 
 //You should delete all of these route handlers and replace them according to your own requirements
@@ -12,11 +12,17 @@ const client = new pg.Client({
 
 client.connect();
 
-app.get("/", (req, res) => {
-    res.json({
-        outcome: "success",
-        message: "you have connected to the omdb database",
-    });
+app.get("/movies/search", async (req, res) => {
+    try {
+        let searchTermValue = req.query.searchTerm;
+        const dbResult = await query(
+            "select * from movies where name like $1 limit 10",
+            [`%${searchTermValue}%`]
+        );
+        res.json(dbResult.rows);
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
 });
 
 // use the environment variable PORT, or 4000 as a fallback
