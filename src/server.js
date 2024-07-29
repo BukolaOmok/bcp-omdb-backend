@@ -1,16 +1,5 @@
 import { app } from "./support/setupExpress.js";
 import { query } from "./support/db.js";
-import pg from "pg";
-
-//You should delete all of these route handlers and replace them according to your own requirements
-const dbURL = process.env.DATABASE_URL;
-
-const client = new pg.Client({
-    connectionString: dbURL,
-    ssl: true,
-});
-
-client.connect();
 
 app.get("/movies/search", async (req, res) => {
     try {
@@ -36,6 +25,7 @@ app.post("/movies/:movie_id/comments", async (req, res) => {
         );
         res.json(dbResult.rows);
     } catch (error) {
+        console.error("Error inserting comment:", error);
         res.status(500).json({ error: error });
     }
 });
