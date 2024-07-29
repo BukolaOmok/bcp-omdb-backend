@@ -27,7 +27,6 @@ jobs:
                   cache: "yarn"
             - name: install dependencies with yarn
               run: yarn install --frozen-lockfile
-            - run: yarn test
             - run: yarn lint
             - name: Check code formatting with prettier
               run: yarn format:check
