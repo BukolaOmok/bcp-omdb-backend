@@ -30,6 +30,21 @@ app.post("/movies/:movie_id/comments", async (req, res) => {
     }
 });
 
+app.get("/movies/:movie_id/comments", async (req, res) => {
+    try {
+        const movieID = parseInt(req.params.movie_id);
+
+        const dbResult = await query(
+            "SELECT * FROM comments WHERE movie_id = $1",
+            [movieID]
+        );
+        res.json(dbResult.rows);
+    } catch (error) {
+        console.error(`Error getting comments for movie:`, error);
+        res.status(500).json({ error: error });
+    }
+});
+
 // use the environment variable PORT, or 4000 as a fallback
 const PORT = process.env.PORT ?? 4000;
 
