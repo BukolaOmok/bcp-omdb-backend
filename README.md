@@ -1,5 +1,7 @@
 # Intermediate starter for _javascript_ express APIs.
 
+Jira Link - https://bcp-omdb-fullstack-project.atlassian.net/jira/software/projects/KAN/boards/1
+
 This is an intermediate starter template for node.js API apps written in JavaScript (not TypeScript) using Express.
 
 It does not use express router, though you are free to make use of that.
