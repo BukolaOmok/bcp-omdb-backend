@@ -1,5 +1,7 @@
 import { app } from "./support/setupExpress.js";
 import { query } from "./support/db.js";
+import { connect } from "amqplib";
+import { getEnvironmentVariableOrFail } from "./support/environmentVariableHelp.js";
 
 app.get("/movies/search", async (req, res) => {
     try {
@@ -18,6 +20,8 @@ app.post("/movies/:movie_id/comments", async (req, res) => {
     try {
         const movieID = parseInt(req.params.movie_id);
         const commentBody = req.body;
+        const msgToSendToQueue = JSON.stringify(commentBody);
+        channel.sendToQueue(queueName, Buffer.from(msgToSendToQueue));
 
         const dbResult = await query(
             "INSERT INTO comments (movie_id, author, comment_text) VALUES ($1, $2, $3) RETURNING *",
@@ -68,6 +72,20 @@ app.get("/comments/:comment_id", async (req, res) => {
         res.status(500).json({ error: error });
     }
 });
+
+async function connectToMessageQueue() {
+    const exchangeURL = getEnvironmentVariableOrFail("AMQP_EXCHANGE_URL");
+    const conn = await connect(exchangeURL);
+
+    const queueName = "OMDB-Post-Comment";
+    const channel = await conn.createChannel();
+    //will only create the queue if it doesn't already exist
+    await channel.assertQueue(queueName, { durable: false });
+    console.log("Connected to message server - OMDB-Post-Comment");
+    return { channel, queueName };
+}
+
+const { channel, queueName } = await connectToMessageQueue();
 
 // use the environment variable PORT, or 4000 as a fallback
 const PORT = process.env.PORT ?? 4000;
